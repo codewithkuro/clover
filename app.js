@@ -6,9 +6,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const upload = require('./modules/upload');
 const apillon_storage = require('./modules/apillon');
+const cloudinary = require('./modules/cloudinary');
+const datastore = require('./modules/datastore');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var studioRouter = require('./routes/studio');
 
 
 var app = express();
@@ -25,10 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/studio', studioRouter);
 app.post('/upload', upload.single('file1'), async (req, res) => {
   let uploadedFile = req.file;
   const bucket = apillon_storage.bucket('33ddd3c8-0d6a-4741-a267-4253552782ee');
-  let result = await bucket.uploadFiles([
+  let apillon_file_result = await bucket.uploadFiles([
     {
       fileName: uploadedFile.filename,
       contentType: uploadedFile.mimetype,
@@ -36,6 +40,17 @@ app.post('/upload', upload.single('file1'), async (req, res) => {
     }
   ], { wrapWithDirectory: true, directoryPath: 'main/uploads' });  
 
+  // upload image to cloudinary
+
+  let cloudinary_result = await cloudinary.uploadImage(uploadedFile.path);
+
+  // datastore[uploadedFile] = 
+  Object.defineProperty(datastore, uploadedFile.filename, {
+    apillon_file_result,
+    cloudinary_result
+  });
+
+  console.log('Datastore: ', datastore);
   res.render('upload-ok');
 });
 

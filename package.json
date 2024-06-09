@@ -1,13 +1,14 @@
 {
   "name": "webapp",
   "version": "0.0.0",
-  "private": true,  
+  "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "apillon": "node ./modules/apillon"
   },
   "dependencies": {
     "@apillon/sdk": "^3.1.0",
+    "cloudinary": "^2.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
