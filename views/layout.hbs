@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <script src="https://cdn.jsdelivr.net/npm/umbrellajs" type="text/javascript"></script>
+    {{!-- <link rel='stylesheet' href='/stylesheets/style.css' /> --}}
+     <style>
+        .visual {
+            text-align: left;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 80px 0 0;
+        }
+    </style>
+
+  </head>
+  <body>
+    <!-- nav -->
+    <div style="overflow: hidden;height: 20px;"> <!-- For Demo, Represents the body -->
+
+<nav class="demo">
+  <a href="/" class="brand">
+    <img class="logo" src="/images/clover-icon.jpg" />
+    <span>Clover Photos</span>
+  </a>
+
+  <!-- responsive-->
+  <input id="bmenub" type="checkbox" class="show">
+  <label for="bmenub" class="burger pseudo button">menu</label>
+
+  <div class="menu">
+    <a href="/edits" class="pseudo button icon-picture">Studio</a>
+    <a href="/" class="button icon-puzzle">Gallery</a>
+  </div>
+</nav>
+
+</div>
+
+    {{{body}}}
+  </body>
+</html>
